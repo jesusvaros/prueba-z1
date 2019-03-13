@@ -6,7 +6,7 @@ import "./sass/App.scss";
 
 import MainPage from "./page/MainPage";
 
-import { authCheckState } from "./redux/actions/auth";
+import { authCheckState,logout } from "./redux/actions/auth";
 import { bindActionCreators } from "redux";
 
 class App extends Component {
@@ -33,7 +33,11 @@ class App extends Component {
         {this.state.togle ? <MainPage /> : <Loginform />}
 
         <div className="notification">
-          <a onClick={() => this.onBind()}> Log in </a>
+          {this.props.isAuthenticated?
+            <a onClick={this.props.logout}>Log out</a>
+          :
+            <a onClick={() => this.onBind()}> Log in </a>
+          }
         </div>
       </div>
     );
@@ -47,6 +51,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
 bindActionCreators(
   {
+    logout,
     authCheckState
   },
   dispatch

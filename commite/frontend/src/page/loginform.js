@@ -29,7 +29,6 @@ class Loginform extends Component {
      if (this.props.error) {
        errorMessage = <p>{this.props.error.message}</p>;
      }
-     console.log(errorMessage);
     return (
       <div className="login-page">
         {errorMessage}

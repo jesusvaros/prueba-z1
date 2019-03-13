@@ -37,8 +37,6 @@ class MainPage extends Component {
         orden: this.state.items.length
       })
       .then(response => {
-        console.log(response);
-
         this.setState(prevState => ({
           items: [...prevState.items, response.data]
         }));
