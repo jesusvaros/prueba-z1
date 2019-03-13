@@ -20,7 +20,6 @@ class Loginform extends Component {
 //     e.preventDefault();
 //     this.props.authLogin(this.state.userName, this.state.password);
 //     if (this.props.error == null) {
-//       this.props.history.push("/Listado");
 //     }
 //   };
 
