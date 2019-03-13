@@ -1,14 +1,23 @@
 import React, { Component } from "react";
 import Loginform from "./page/loginform";
 
+import {connect} from "react-redux";
 import "./sass/App.scss";
 
 import MainPage from "./page/MainPage";
+
+import { authCheckState } from "./redux/actions/auth";
+import { bindActionCreators } from "redux";
 
 class App extends Component {
   state = {
     togle: true
   };
+
+  componentDidMount (){
+    this.props.authCheckState();
+  
+  }
   onBind = () => {
     this.setState(prevState => ({
       togle: !prevState.togle
@@ -31,4 +40,16 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isAuthenticated:state.token !== null,
+});
+
+const mapDispatchToProps = dispatch =>
+bindActionCreators(
+  {
+    authCheckState
+  },
+  dispatch
+);
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);

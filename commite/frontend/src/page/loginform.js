@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-
+import { authLogin } from "../redux/actions/auth";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 //import "../sass/login.scss";
-
 
 class Loginform extends Component {
   constructor(props) {
@@ -16,65 +17,77 @@ class Loginform extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-//   onSubmit = e => {
-//     e.preventDefault();
-//     this.props.authLogin(this.state.userName, this.state.password);
-//     if (this.props.error == null) {
-//     }
-//   };
+    onSubmit = e => {
+      e.preventDefault();
+      this.props.authLogin(this.state.userName, this.state.password);
+      if (this.props.error == null) {
+      }
+    };
 
   render() {
-    // let errorMessage = null;
-    // if (this.props.error) {
-    //   errorMessage = <p>{this.props.error.message}</p>;
-    // }
-
+     let errorMessage = null;
+     if (this.props.error) {
+       errorMessage = <p>{this.props.error.message}</p>;
+     }
+     console.log(errorMessage);
     return (
       <div className="login-page">
-          
-            {/* {errorMessage} */}
-              <div className="field is-grouped ">
-                <form onSubmit={this.onSubmit}>
-                  <label className="label">Username</label>
-                  <div className="control has-icons-left">
-                    <input
-                      id="userName"
-                      type="text"
-                      onChange={this.onChange}
-                      value={this.state.userName}
-                      className="input is-rounded"
-                      placeholder="User"
-                    />
-                    <span className="icon is-small is-left">
-                      <i className="fas fa-user" />
-                    </span>
-                  </div>
-                  <label className="label">Password</label>
-                  <div className="control has-icons-left">
-                    <input
-                      id="password"
-                      type="password"
-                      onChange={this.onChange}
-                      value={this.state.password}
-                      className="input is-rounded"
-                      placeholder="Password"
-                    />
-                    <span className="icon is-small is-left">
-                      <i className="fas fa-lock" />
-                    </span>
-                  </div>
-                  <div className="buttonsubmit">
-                    <input
-                      className="button"
-                      type="submit"
-                      value="enviar"
-                    />
-                  </div>
-                </form>
-              </div>
+        {errorMessage}
+        <div className="field is-grouped ">
+          <form onSubmit={this.onSubmit}>
+            <label className="label">Username</label>
+            <div className="control has-icons-left">
+              <input
+                id="userName"
+                type="text"
+                onChange={this.onChange}
+                value={this.state.userName}
+                className="input is-rounded"
+                placeholder="User"
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-user" />
+              </span>
+            </div>
+            <label className="label">Password</label>
+            <div className="control has-icons-left">
+              <input
+                id="password"
+                type="password"
+                onChange={this.onChange}
+                value={this.state.password}
+                className="input is-rounded"
+                placeholder="Password"
+              />
+              <span className="icon is-small is-left">
+                <i className="fas fa-lock" />
+              </span>
+            </div>
+            <div className="buttonsubmit">
+              <input className="button" type="submit" value="enviar" />
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
 }
+// take the state from the store
+const mapStateToProps = state => ({
+  loading: state.loading,
+  error: state.error,
+  isAuthenticated: state.token !== null
+});
+//send to authlogin the login data
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      authLogin
+    },
+    dispatch
+  );
 
-export default Loginform;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Loginform);

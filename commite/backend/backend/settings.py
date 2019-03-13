@@ -28,11 +28,17 @@ INSTALLED_APPS = [
     #We have to import our app here
     'listacofrade',
     #Used for make the api
+    'corsheaders',
     'rest_framework',
+
+    'rest_auth',
+    'rest_framework.authtoken',
+
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,6 +46,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000',
+    '127.0.0.1:8000'
+)
 
 ROOT_URLCONF = 'backend.urls'
 

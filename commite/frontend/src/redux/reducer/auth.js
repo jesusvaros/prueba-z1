@@ -4,14 +4,14 @@ import { updateObject } from "../utility";
 
 const authState = {
   token: null,
-  error1: null,
+  error: null,
   loading1: false,
 };
 
 //and the begining is loading 
 const authStart = (state, action) => {
   return updateObject(state, {
-    error1: null,
+    error: null,
     loading1: true
   });
 };
@@ -19,19 +19,19 @@ const authStart = (state, action) => {
 const authSuccess = (state, action) => {
   return updateObject(state, {
     token: action.token,
-    error1: null,
+    error: null,
     loading1: false
   });
 };
 //fail means we have only an error
 const authFail = (state, action) => {
   return updateObject(state, {
-    error1: action.error1,
+    error: action.error,
     loading1: false
   });
 };
 //logout will delete the token
-const authLogout = (state, action) => {
+const authLogout = (state) => {
   return updateObject(state, {
     token: null,
     loading1: false
