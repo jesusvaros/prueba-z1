@@ -66,7 +66,7 @@ class AdminPage extends Component {
                       {this.state.edit ? (
                         <div className="buttons">
                           <div className="number">{index + 1}</div>
-                          {/* <Edit /> */}
+                          {<Edit />}
                           <div className="botones">
                             <button
                               className="button is-danger"
