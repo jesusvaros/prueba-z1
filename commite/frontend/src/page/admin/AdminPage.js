@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
-//import "../sass/listado.scss";
-//import Edit from "../components/edit";
-//import Item from "../components/item";
+//import "../sass/AdminPage.scss";
+import Edit from "../admin/edit";
+import Item from "../admin/item";
 //import { fetchItems } from "../redux/actions/itemsActions";
 //import { bindActionCreators } from "redux";
 
@@ -53,7 +52,7 @@ class AdminPage extends Component {
               <div>
                 {this.state.itemsdate.map((itemda, index) => (
                   <div key={itemda.id}>
-                    {/* <Item /> */}
+                    {<Item item={itemda} index={index}/>}
                   </div>
                 ))}
               </div>
@@ -91,8 +90,8 @@ class AdminPage extends Component {
                           </div>
                         </div>
                       ) : (
-                        // <Item />
-                        null
+                        <Item item={this.state.itemda} index={index} />
+                       
                       )}
                     </div>
                   </div>

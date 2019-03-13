@@ -1,5 +1,5 @@
 import React from "react";
-import "../sass/item.scss";
+//import "../sass/item.scss";
 
 const Item = ({ item, index }) => (
   <div className="media ">
