@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 //import "../sass/AdminPage.scss";
 import Edit from "../admin/edit";
 import Item from "../admin/item";
-//import { fetchItems } from "../redux/actions/itemsActions";
-//import { bindActionCreators } from "redux";
+
+
 
 class AdminPage extends Component {
   state = {
@@ -13,8 +13,24 @@ class AdminPage extends Component {
     show: false
   };
 
+  deleteData = item => {
+    axios.delete(`http://127.0.0.1:8000/api/${item.id}/delete/`);
+    window.location.reload();
+  };
+
+  editData = () => {
+    this.setState(prevState => ({
+      edit: !prevState.edit
+    }));
+  };
+
+  changeList = () => {
+    this.setState(prevState => ({
+      show: !prevState.show
+    }));
+  };
+
   fetchArticles = () => {
-      console.log(this.state.itemsdate)
     fetch("http://127.0.0.1:8000/api/datesort/")
       .then(res => res.json())
       .then(json => this.setState({ itemsdate: json }));
