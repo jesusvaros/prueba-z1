@@ -1,4 +1,4 @@
-import { fetchItems, deleteItem } from "../../redux/actions/itemsActions";
+import { fetchItems,editItem } from "../../redux/actions/itemsActions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
@@ -34,12 +34,53 @@ class AdminPage extends Component {
       show: !prevState.show
     }));
   };
+  
+  upItem = (index) => {
+    if (index === 0) {
+      return;
+    }
+    //this will rotate the item going up with the one in top
+    const position = index - 1;
+    console.log(position);
+    const items = this.props.items.slice();
+    console.log(items);
+    const move = items[position];
+    console.log(move);
+    items[position]=items[index];
+    
+    items[index]=move;
+    console.log(items);
 
-  fetchArticles = () => {
-    fetch("http://127.0.0.1:8000/api/datesort/")
-      .then(res => res.json())
-      .then(json => this.setState({ itemsdate: json }));
+    this.update(items);
   };
+
+  downItem = (index) => {
+    if (index === this.props.items.length - 1) {
+      return;
+    }
+    //this will rotate the item going up with the one in top
+    const position = index + 1;
+    console.log(position);
+    const items = this.props.items.slice();
+    console.log(items);
+    const move = items[position];
+    console.log(move);
+    items[position]=items[index];
+
+    items[index]=move;
+    console.log(items);
+
+    this.update(items);
+
+
+  };
+  update =(items)=>{
+    items.forEach((item) => {
+      this.props.editItem(item.name, item.email, item.creacion, item.orden, item.id);
+      console.log(item);
+      });  
+  }
+  
   render() {
     return (
       <div className="container">
@@ -63,9 +104,6 @@ class AdminPage extends Component {
                   <button className="button" onClick={this.submitposition}>
                     submit position
                   </button>
-                  <button className="button" onClick={this.fetchArticles}>
-                    submit position
-                  </button>
                 </span>
               )}
             </div>
@@ -80,31 +118,24 @@ class AdminPage extends Component {
             ) : (
               <div>
                 <div className="tag is-ligth">Ordenado por Creacion</div>
-                {this.state.itemsdate.map((item, index) => (
+                {this.props.items.map((item, index) => (
                   <div key={item.id}>
                     <div>
                       {this.state.edit ? (
                         <div className="buttons">
                           <div className="number">{index + 1}</div>
-                          {<Edit />}
-                          <div className="botones">
-                            <button
-                              className="button is-danger"
-                              onClick={() => this.deleteData(item)}
-                            >
-                              Delete
-                            </button>
+                          {<Edit item={item}/>}
+                          <div className="botones">   
                             <button
                               className="button"
-                              onClick={() => this.upItem(item, index)}
+                              onClick={() => this.upItem(index)}
                             >
                               <i className="fas fa-arrow-up" />
                             </button>
                             <button
                               className="button"
-                              onClick={() => this.downItem(item, index)}
-                            >
-                              
+                              onClick={() => this.downItem(index)}
+                            >     
                               <i className="fas fa-arrow-down" />
                             </button>
                           </div>
@@ -135,7 +166,7 @@ const mapStateToProps = state => ({
   bindActionCreators(
     {
       fetchItems,
-      deleteItem
+      editItem,
     },
     dispatch
   );

@@ -55,8 +55,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.token !== null
+const mapStoreToProps = (store) => ({
+  isAuthenticated: store.authReducer.token !== null
 });
 
 const mapDispatchToProps = dispatch =>
@@ -69,6 +69,6 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default connect(
-  mapStateToProps,
+  mapStoreToProps,
   mapDispatchToProps
 )(App);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
-//import "../sass/edit.scss";
+import { deleteItem, editItem } from "../../redux/actions/itemsActions";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 class Edit extends Component {
   constructor(props) {
@@ -23,19 +24,8 @@ class Edit extends Component {
     let email = this.state.email;
     let creacion = this.state.creacion;
     let orden = this.state.orden;
-    axios
-      .put(`http://127.0.0.1:8000/api/${this.props.item.id}/update/`, {
-        name: name,
-        email: email,
-        creacion: creacion,
-        orden: orden
-      })
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    let id = this.props.item.id;
+    this.props.editItem(name, email, creacion, orden, id);
   };
 
   render() {
@@ -88,6 +78,12 @@ class Edit extends Component {
                 type="submit"
                 value="Guardar"
               />
+              <button
+                className="button is-danger"
+                onClick={() => this.props.deleteItem(this.props.item.id)}
+              >
+                Delete
+              </button>
             </div>
           </form>
         </div>
@@ -96,4 +92,20 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
+const mapStoreToProps = store => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      editItem,
+      deleteItem
+    },
+    dispatch
+  );
+
+export default connect(
+  mapStoreToProps,
+  mapDispatchToProps
+)(Edit);

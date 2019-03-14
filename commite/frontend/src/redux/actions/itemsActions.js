@@ -8,8 +8,9 @@ export const createItem = ( name,email,creacion, orden ) =>{
      return axios.post("http://127.0.0.1:8000/api/create/", {name,email,creacion, orden})
       .then (response => {
         dispatch (createItemSuccess(response.data))
+        console.log(response);
       })
-      .catch(error=> {
+      .catch(error=>{ 
         throw(error);
       });
   };

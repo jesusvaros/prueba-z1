@@ -12,6 +12,7 @@ class Loginform extends Component {
       password: ""
     };
   }
+  
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
@@ -28,8 +29,15 @@ class Loginform extends Component {
      let errorMessage = null;
      if (this.props.error) {
        errorMessage = <p>{this.props.error.message}</p>;
+       console.log(errorMessage);
      }
+     
     return (
+      <div>
+      {this.props.loading?  
+        <i class="fa fa-spinner fa-spin"></i>
+      
+      :
       <div className="login-page">
         {errorMessage}
         <div className="field is-grouped ">
@@ -68,14 +76,17 @@ class Loginform extends Component {
           </form>
         </div>
       </div>
+      }
+      </div>
+      
     );
   }
 }
 // take the state from the store
-const mapStateToProps = state => ({
-  loading: state.loading,
-  error: state.error,
-  isAuthenticated: state.token !== null
+const mapStoreToProps = (store) => ({
+  loading: store.authReducer.loading,
+  error: store.authReducer.error,
+  isAuthenticated: store.authReducer.token !== null
 });
 //send to authlogin the login data
 const mapDispatchToProps = dispatch =>
@@ -87,6 +98,6 @@ const mapDispatchToProps = dispatch =>
   );
 
 export default connect(
-  mapStateToProps,
+  mapStoreToProps,
   mapDispatchToProps
 )(Loginform);
