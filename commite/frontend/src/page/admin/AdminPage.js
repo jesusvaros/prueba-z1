@@ -1,5 +1,7 @@
+import { fetchItems, deleteItem } from "../../redux/actions/itemsActions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
 //import "../sass/AdminPage.scss";
 import Edit from "../admin/edit";
 import Item from "../admin/item";
@@ -12,10 +14,14 @@ class AdminPage extends Component {
     edit: false,
     show: false
   };
-
-  deleteData = item => {
-    axios.delete(`http://127.0.0.1:8000/api/${item.id}/delete/`);
-    window.location.reload();
+  fetchArticles = () => {
+    fetch("http://127.0.0.1:8000/api/datesort/")
+      .then(res => res.json())
+      .then(json => this.setState({ itemsdate: json }));
+  };
+  componentDidMount = () => {
+    this.props.fetchItems();
+    this.fetchArticles();
   };
 
   editData = () => {
@@ -23,7 +29,6 @@ class AdminPage extends Component {
       edit: !prevState.edit
     }));
   };
-
   changeList = () => {
     this.setState(prevState => ({
       show: !prevState.show
@@ -87,26 +92,25 @@ class AdminPage extends Component {
                               className="button is-danger"
                               onClick={() => this.deleteData(item)}
                             >
-                              {" "}
-                              Delete{" "}
+                              Delete
                             </button>
                             <button
                               className="button"
                               onClick={() => this.upItem(item, index)}
                             >
-                              <i className="fas fa-arrow-up" />{" "}
+                              <i className="fas fa-arrow-up" />
                             </button>
                             <button
                               className="button"
                               onClick={() => this.downItem(item, index)}
                             >
-                              {" "}
-                              <i className="fas fa-arrow-down" />{" "}
+                              
+                              <i className="fas fa-arrow-down" />
                             </button>
                           </div>
                         </div>
                       ) : (
-                        <Item item={this.state.itemda} index={index} />
+                        <Item item={item} index={index} />
                        
                       )}
                     </div>
@@ -123,11 +127,22 @@ class AdminPage extends Component {
   }
 }
 const mapStateToProps = state => ({
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.token !== null,
+    items:state.itemsReducer
   });
 
+  const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchItems,
+      deleteItem
+    },
+    dispatch
+  );
+
   export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
   )(AdminPage);
 
 

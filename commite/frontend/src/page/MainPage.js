@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import axios from "axios";
 
-import "../sass/MainPage.scss";
+//import "../sass/MainPage.scss";
+
 
 class MainPage extends Component {
   // the parameters are saved here before send to server

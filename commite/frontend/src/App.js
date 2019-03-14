@@ -6,8 +6,7 @@ import { connect } from "react-redux";
 import "./sass/App.scss";
 
 import MainPage from "./page/MainPage";
-
-import { authCheckState, logout } from "./redux/actions/auth";
+import { authCheckState ,logout } from "./redux/actions/auth";
 import { bindActionCreators } from "redux";
 
 class App extends Component {
