@@ -2,7 +2,7 @@ import { fetchItems, editItem } from "../../redux/actions/itemsActions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-//import "../sass/AdminPage.scss";
+import "../../sass/adminPage.scss";
 import Edit from "../admin/edit";
 import Item from "../admin/item";
 
@@ -80,9 +80,9 @@ class AdminPage extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="marginext">
         {this.props.isAuthenticated ? (
-          <div>
+          <div className="marginext">
             <div>
               <button className="button" onClick={this.changeList}>
                 Sort by {this.state.show ? "Creacion" : "Date"}
@@ -113,11 +113,11 @@ class AdminPage extends Component {
                 ))}
               </div>
             ) : (
-              <div>
+              <div className="list">
                 <div className="tag is-ligth">Ordenado por Creacion</div>
                 {this.props.items.map((item, index) => (
                   <div key={item.id}>
-                    <div>
+                    <div className="field is-grouped-multiline">
                       {this.state.edit ? (
                         <div className="buttons">
                           <div className="number">{index + 1}</div>

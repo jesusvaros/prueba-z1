@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { authLogin } from "../redux/actions/auth";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-//import "../sass/login.scss";
+import "../sass/Loginform.scss";
 
 class Loginform extends Component {
   constructor(props) {
@@ -32,13 +32,13 @@ class Loginform extends Component {
     }
 
     return (
-      <div>
+      <div className="box">
         {this.props.loading ? (
           <i className="fa fa-spinner fa-spin" />
         ) : (
           <div className="login-page">
             {errorMessage}
-            <div className="field is-grouped ">
+            <div className="registerbox field is-grouped-right ">
               <form onSubmit={this.onSubmit}>
                 <label className="label">Username</label>
                 <div className="control has-icons-left">

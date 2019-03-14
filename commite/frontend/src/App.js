@@ -28,7 +28,7 @@ class App extends Component {
         <div className="notification">
           <div className="hermandapp">HermandAPP </div>
         </div>
-
+      <div className="midcontent">
         {this.state.togle ? (
           <MainPage />
         ) : (
@@ -36,8 +36,9 @@ class App extends Component {
             {this.props.isAuthenticated ? <AdminPage /> : <Loginform />}
           </div>
         )}
+      </div>
 
-        <div className="notification">
+        <div className="botton notification">
           {this.props.isAuthenticated ? (
             <div>
               <a onClick={() => this.onBind()}>

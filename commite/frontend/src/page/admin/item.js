@@ -1,8 +1,8 @@
 import React from "react";
-//import "../sass/item.scss";
+import "../../sass/item.scss";
 
 const Item = ({ item, index }) => (
-  <div className="media ">
+  <div className="media center ">
     <div className="media-left">
       <div className="number">{index + 1}</div>
     </div>
