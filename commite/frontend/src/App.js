@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Loginform from "./page/loginform";
-import AdminPage from './page/admin/AdminPage';
+import AdminPage from "./page/admin/AdminPage";
 
 import { connect } from "react-redux";
 import "./sass/App.scss";
 
 import MainPage from "./page/MainPage";
-import { authCheckState ,logout } from "./redux/actions/auth";
+import { authCheckState, logout } from "./redux/actions/auth";
 import { bindActionCreators } from "redux";
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.props.authCheckState();  
+    this.props.authCheckState();
   }
   onBind = () => {
     this.setState(prevState => ({
@@ -32,13 +32,14 @@ class App extends Component {
         {this.state.togle ? (
           <MainPage />
         ) : (
-          <div>{this.props.isAuthenticated ? <AdminPage/> : <Loginform />}</div>
+          <div>
+            {this.props.isAuthenticated ? <AdminPage /> : <Loginform />}
+          </div>
         )}
-        
+
         <div className="notification">
           {this.props.isAuthenticated ? (
             <div>
-              
               <a onClick={() => this.onBind()}>
                 {this.state.togle ? <span>Admin</span> : <span>Back</span>}
               </a>
@@ -55,7 +56,7 @@ class App extends Component {
   }
 }
 
-const mapStoreToProps = (store) => ({
+const mapStoreToProps = store => ({
   isAuthenticated: store.authReducer.token !== null
 });
 

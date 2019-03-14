@@ -12,78 +12,75 @@ class Loginform extends Component {
       password: ""
     };
   }
-  
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-    onSubmit = e => {
-      e.preventDefault();
-      this.props.authLogin(this.state.userName, this.state.password);
-      if (this.props.error == null) {
-      }
-    };
+  onSubmit = e => {
+    e.preventDefault();
+    this.props.authLogin(this.state.userName, this.state.password);
+    if (this.props.error == null) {
+    }
+  };
 
   render() {
-     let errorMessage = null;
-     if (this.props.error) {
-       errorMessage = <p>{this.props.error.message}</p>;
-       console.log(errorMessage);
-     }
-     
+    let errorMessage = null;
+    if (this.props.error) {
+      errorMessage = <p>{this.props.error.message}</p>;
+      console.log(errorMessage);
+    }
+
     return (
       <div>
-      {this.props.loading?  
-        <i class="fa fa-spinner fa-spin"></i>
-      
-      :
-      <div className="login-page">
-        {errorMessage}
-        <div className="field is-grouped ">
-          <form onSubmit={this.onSubmit}>
-            <label className="label">Username</label>
-            <div className="control has-icons-left">
-              <input
-                id="userName"
-                type="text"
-                onChange={this.onChange}
-                value={this.state.userName}
-                className="input is-rounded"
-                placeholder="User"
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-user" />
-              </span>
+        {this.props.loading ? (
+          <i className="fa fa-spinner fa-spin" />
+        ) : (
+          <div className="login-page">
+            {errorMessage}
+            <div className="field is-grouped ">
+              <form onSubmit={this.onSubmit}>
+                <label className="label">Username</label>
+                <div className="control has-icons-left">
+                  <input
+                    id="userName"
+                    type="text"
+                    onChange={this.onChange}
+                    value={this.state.userName}
+                    className="input is-rounded"
+                    placeholder="User"
+                  />
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-user" />
+                  </span>
+                </div>
+                <label className="label">Password</label>
+                <div className="control has-icons-left">
+                  <input
+                    id="password"
+                    type="password"
+                    onChange={this.onChange}
+                    value={this.state.password}
+                    className="input is-rounded"
+                    placeholder="Password"
+                  />
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-lock" />
+                  </span>
+                </div>
+                <div className="buttonsubmit">
+                  <input className="button" type="submit" value="enviar" />
+                </div>
+              </form>
             </div>
-            <label className="label">Password</label>
-            <div className="control has-icons-left">
-              <input
-                id="password"
-                type="password"
-                onChange={this.onChange}
-                value={this.state.password}
-                className="input is-rounded"
-                placeholder="Password"
-              />
-              <span className="icon is-small is-left">
-                <i className="fas fa-lock" />
-              </span>
-            </div>
-            <div className="buttonsubmit">
-              <input className="button" type="submit" value="enviar" />
-            </div>
-          </form>
-        </div>
+          </div>
+        )}
       </div>
-      }
-      </div>
-      
     );
   }
 }
 // take the state from the store
-const mapStoreToProps = (store) => ({
+const mapStoreToProps = store => ({
   loading: store.authReducer.loading,
   error: store.authReducer.error,
   isAuthenticated: store.authReducer.token !== null

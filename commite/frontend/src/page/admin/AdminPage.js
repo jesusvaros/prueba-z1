@@ -1,12 +1,10 @@
-import { fetchItems,editItem } from "../../redux/actions/itemsActions";
+import { fetchItems, editItem } from "../../redux/actions/itemsActions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
+import { bindActionCreators } from "redux";
 //import "../sass/AdminPage.scss";
 import Edit from "../admin/edit";
 import Item from "../admin/item";
-
-
 
 class AdminPage extends Component {
   state = {
@@ -34,8 +32,8 @@ class AdminPage extends Component {
       show: !prevState.show
     }));
   };
-  
-  upItem = (index) => {
+
+  upItem = index => {
     if (index === 0) {
       return;
     }
@@ -46,15 +44,15 @@ class AdminPage extends Component {
     console.log(items);
     const move = items[position];
     console.log(move);
-    items[position]=items[index];
-    
-    items[index]=move;
+    items[position] = items[index];
+
+    items[index] = move;
     console.log(items);
 
     this.update(items);
   };
 
-  downItem = (index) => {
+  downItem = index => {
     if (index === this.props.items.length - 1) {
       return;
     }
@@ -65,22 +63,21 @@ class AdminPage extends Component {
     console.log(items);
     const move = items[position];
     console.log(move);
-    items[position]=items[index];
+    items[position] = items[index];
 
-    items[index]=move;
+    items[index] = move;
     console.log(items);
 
     this.update(items);
-
-
   };
-  update =(items)=>{
-    items.forEach((item) => {
-      this.props.editItem(item.name, item.email, item.creacion, item.orden, item.id);
+  update = items => {
+    items.forEach((item, index) => {
+      this.props.editItem(item.name, item.email, item.creacion, index, item.id);
       console.log(item);
-      });  
-  }
-  
+    });
+    this.props.fetchItems();
+  };
+
   render() {
     return (
       <div className="container">
@@ -111,7 +108,7 @@ class AdminPage extends Component {
               <div>
                 {this.state.itemsdate.map((itemda, index) => (
                   <div key={itemda.id}>
-                    {<Item item={itemda} index={index}/>}
+                    {<Item item={itemda} index={index} />}
                   </div>
                 ))}
               </div>
@@ -124,8 +121,8 @@ class AdminPage extends Component {
                       {this.state.edit ? (
                         <div className="buttons">
                           <div className="number">{index + 1}</div>
-                          {<Edit item={item}/>}
-                          <div className="botones">   
+                          {<Edit item={item} />}
+                          <div className="botones">
                             <button
                               className="button"
                               onClick={() => this.upItem(index)}
@@ -135,14 +132,13 @@ class AdminPage extends Component {
                             <button
                               className="button"
                               onClick={() => this.downItem(index)}
-                            >     
+                            >
                               <i className="fas fa-arrow-down" />
                             </button>
                           </div>
                         </div>
                       ) : (
                         <Item item={item} index={index} />
-                       
                       )}
                     </div>
                   </div>
@@ -158,22 +154,20 @@ class AdminPage extends Component {
   }
 }
 const mapStateToProps = state => ({
-    isAuthenticated: state.token !== null,
-    items:state.itemsReducer
-  });
+  isAuthenticated: state.token !== null,
+  items: state.itemsReducer
+});
 
-  const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchItems,
-      editItem,
+      editItem
     },
     dispatch
   );
 
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(AdminPage);
-
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminPage);

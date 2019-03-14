@@ -1,31 +1,29 @@
 import * as actionTypes from "../actions/actionTypes";
 
-const deleteItem =(state, action) =>{
+const deleteItem = (state, action) => {
   const newState = state.filter(item => item.id !== action.id);
 
-  return newState ;
+  return newState;
 };
 
-const editItem =(state, action)=>{
-  console.warn('heello')
-
+const editItem = (state, action) => {
+  console.warn(action.payload);
   const index = state.findIndex(item => item.id === action.payload.id);
-  state[index]=action.payload;
-
+  state[index] = action.payload;
+  console.log(state);
   return state;
 };
 
-
-function itemsReducer(state=[ ] , action) {
+function itemsReducer(state = [], action) {
   switch (action.type) {
     case actionTypes.ADD_ITEM:
       return [...state, action.payload];
     case actionTypes.FETCH_ITEMS_SUCCESS:
       return action.items;
     case actionTypes.DELETE_ITEM:
-      return deleteItem (state,action);
+      return deleteItem(state, action);
     case actionTypes.EDIT_ITEM:
-      return editItem (state,action);
+      return editItem(state, action);
     default:
       return state;
   }
