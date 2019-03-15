@@ -4,7 +4,7 @@ import { fetchItems, createItem } from "../redux/actions/itemsActions";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import Recaptcha  from 'react-recaptcha';
+import Recaptcha from "react-recaptcha";
 import "../sass/MainPage.scss";
 
 class MainPage extends Component {
@@ -46,16 +46,16 @@ class MainPage extends Component {
     }
   };
 
-  recaptchaLoaded =()=>{
-    console.log('recaptcha-loaded');
-  }
-  bindhuman=(response)=>{
-    if (response){
+  recaptchaLoaded = () => {
+    console.log("recaptcha-loaded");
+  };
+  bindhuman = response => {
+    if (response) {
       this.setState({
-        isHuman:true,
-      })
+        isHuman: true
+      });
     }
-  }
+  };
 
   render() {
     return (

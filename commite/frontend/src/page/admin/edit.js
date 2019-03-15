@@ -3,7 +3,6 @@ import { deleteItem, editItem } from "../../redux/actions/itemsActions";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-
 class Edit extends Component {
   constructor(props) {
     super(props);

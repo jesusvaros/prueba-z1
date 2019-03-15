@@ -1,26 +1,25 @@
-.hermandapp{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20px;
+.hermandapp {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 20px;
 }
 
-.buttonsubmit{
-    margin-top: 5px;
+.buttonsubmit {
+  margin-top: 5px;
 }
-.control{
-    margin-top: 1px;
+.control {
+  margin-top: 1px;
 }
-.inf{
-   
-    display: flex;
-    flex-direction: column;
-    max-height: 125px;
-    margin-left: auto;
-    margin-right: auto;
+.inf {
+  display: flex;
+  flex-direction: column;
+  max-height: 125px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media screen and (max-width: 640px) {
-    .main{
-        display: flex;
-        flex-direction: column;
-    }
+  .main {
+    display: flex;
+    flex-direction: column;
   }
+}

@@ -7,11 +7,22 @@ const deleteItem = (state, action) => {
 };
 
 const editItem = (state, action) => {
-  console.warn(action.payload);
   const index = state.findIndex(item => item.id === action.payload.id);
   state[index] = action.payload;
+  //const newState=state.map(item=>item.orden).sort();
+  const newState = state.sort(function(a, b) {
+    if (a.orden > b.orden) {
+      return 1;
+    }
+    if (a.orden < b.orden) {
+      return -1;
+    }
+    // a must be equal to b
+    return 0;
+  });
+  //state=state.item.sort();
   console.log(state);
-  return state;
+  return newState;
 };
 
 function itemsReducer(state = [], action) {

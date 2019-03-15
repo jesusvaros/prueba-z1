@@ -37,17 +37,13 @@ class AdminPage extends Component {
     if (index === 0) {
       return;
     }
+    this.props.fetchItems();
     //this will rotate the item going up with the one in top
     const position = index - 1;
-    console.log(position);
     const items = this.props.items.slice();
-    console.log(items);
     const move = items[position];
-    console.log(move);
     items[position] = items[index];
-
     items[index] = move;
-    console.log(items);
 
     this.update(items);
   };
@@ -56,24 +52,19 @@ class AdminPage extends Component {
     if (index === this.props.items.length - 1) {
       return;
     }
+    this.props.fetchItems();
     //this will rotate the item going up with the one in top
     const position = index + 1;
-    console.log(position);
     const items = this.props.items.slice();
-    console.log(items);
     const move = items[position];
-    console.log(move);
     items[position] = items[index];
-
     items[index] = move;
-    console.log(items);
-
     this.update(items);
   };
+
   update = items => {
     items.forEach((item, index) => {
       this.props.editItem(item.name, item.email, item.creacion, index, item.id);
-      console.log(item);
     });
     this.props.fetchItems();
   };
@@ -97,9 +88,6 @@ class AdminPage extends Component {
                 <span>
                   <button className="button" onClick={this.editData}>
                     <i className="far fa-edit" />
-                  </button>
-                  <button className="button" onClick={this.submitposition}>
-                    submit position
                   </button>
                 </span>
               )}
