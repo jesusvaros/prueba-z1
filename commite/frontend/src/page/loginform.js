@@ -38,7 +38,7 @@ class Loginform extends Component {
         ) : (
           <div className="login-page">
             {errorMessage}
-            <div className="registerbox field is-grouped-right ">
+            <div className="input-login field is-grouped-right ">
               <form onSubmit={this.onSubmit}>
                 <label className="label">Username</label>
                 <div className="control has-icons-left">

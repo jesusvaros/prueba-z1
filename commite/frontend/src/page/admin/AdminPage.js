@@ -2,7 +2,7 @@ import { fetchItems, editItem } from "../../redux/actions/itemsActions";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import "../../sass/adminPage.scss";
+//import "../../sass/adminPage.scss";
 import Edit from "../admin/edit";
 import Item from "../admin/item";
 
@@ -13,7 +13,7 @@ class AdminPage extends Component {
     show: false
   };
   fetchArticles = () => {
-    fetch("http://127.0.0.1:8000/api/datesort/")
+    fetch("https://backend-cofrade.herokuapp.com/api/datesort/")
       .then(res => res.json())
       .then(json => this.setState({ itemsdate: json }));
   };
@@ -38,7 +38,6 @@ class AdminPage extends Component {
       return;
     }
     this.props.fetchItems();
-    //this will rotate the item going up with the one in top
     const position = index - 1;
     const items = this.props.items.slice();
     const move = items[position];
@@ -53,7 +52,6 @@ class AdminPage extends Component {
       return;
     }
     this.props.fetchItems();
-    //this will rotate the item going up with the one in top
     const position = index + 1;
     const items = this.props.items.slice();
     const move = items[position];
@@ -71,16 +69,16 @@ class AdminPage extends Component {
 
   render() {
     return (
-      <div className="marginext">
+      <div >
         {this.props.isAuthenticated ? (
-          <div className="marginext">
+          <div className="container-menu-login">
             <div>
               <button className="button" onClick={this.changeList}>
                 Sort by {this.state.show ? "Creacion" : "Date"}
               </button>
               {this.state.show ? (
                 <div>
-                  <div className="tag is-ligth">
+                  <div className=" tag is-ligth">
                     Ordenado por fecha de salida
                   </div>
                 </div>
@@ -101,7 +99,7 @@ class AdminPage extends Component {
                 ))}
               </div>
             ) : (
-              <div className="list">
+              <div >
                 <div className="tag is-ligth">Ordenado por Creacion</div>
                 {this.props.items.map((item, index) => (
                   <div key={item.id}>

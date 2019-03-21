@@ -13,7 +13,7 @@ SECRET_KEY = 'aih=e=2p6_r96xpw5d!p$z61e(z2!*uvy2(x^4v!p7w+yhyrb1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -48,7 +48,9 @@ MIDDLEWARE = [
 ]
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',
-    '127.0.0.1:8000'
+    '127.0.0.1:8000',
+    'frontend-cofrade.herokuapp.com',
+    'backend-cofrade.herokuapp.com'
 )
 
 ROOT_URLCONF = 'backend.urls'

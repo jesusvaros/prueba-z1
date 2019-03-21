@@ -1,15 +1,11 @@
-.hermandapp {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-size: 20px;
-}
-
-.buttonsubmit {
+.button-submit {
   margin-top: 5px;
 }
-.control {
-  margin-top: 1px;
+.input-push{
+  margin-top: 2px;
 }
-.inf {
+
+.container-info{
   display: flex;
   flex-direction: column;
   max-height: 125px;
@@ -18,8 +14,13 @@
 }
 
 @media screen and (max-width: 640px) {
-  .main {
+  .container-mainpage {
+    
     display: flex;
     flex-direction: column;
+  }
+  .container-info{
+    margin-top:5px;
+    width: 100%;
   }
 }

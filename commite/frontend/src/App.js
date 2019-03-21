@@ -26,9 +26,9 @@ class App extends Component {
     return (
       <div className="container">
         <div className="notification">
-          <div className="hermandapp">HermandAPP </div>
+          <div className="logo">HermandAPP </div>
         </div>
-      <div className="midcontent">
+      <div className="container-menu">
         {this.state.togle ? (
           <MainPage />
         ) : (
@@ -38,7 +38,7 @@ class App extends Component {
         )}
       </div>
 
-        <div className="botton notification">
+        <div className="container-menu-down notification">
           {this.props.isAuthenticated ? (
             <div>
               <a onClick={() => this.onBind()}>

@@ -60,7 +60,7 @@ class MainPage extends Component {
   render() {
     return (
       <div className="box">
-        <div className=" main field is-grouped">
+        <div className=" container-mainpage field is-grouped">
           <form onSubmit={this.handleSubmit}>
             <br />
             <div className="control has-icons-left">
@@ -70,7 +70,7 @@ class MainPage extends Component {
                 onChange={this.onChange}
                 value={this.state.name}
                 placeholder="Nombre "
-                className="input  is-rounded"
+                className="input is-rounded input-push"
               />
               <span className="icon is-small is-left">
                 <i className="fas fa-torii-gate" />
@@ -83,7 +83,7 @@ class MainPage extends Component {
                 onChange={this.onChange}
                 value={this.state.email}
                 placeholder="Email"
-                className="input is-rounded"
+                className="input is-rounded input-push"
               />
               <span className="icon is-small is-left">
                 <i className="fas fa-envelope" />
@@ -95,15 +95,15 @@ class MainPage extends Component {
                 type="date"
                 onChange={this.onChange}
                 value={this.state.creacion}
-                className="input is-rounded"
+                className="input is-rounded input-push"
               />
               <span className="icon is-small is-left">
                 <i className="fas fa-calendar-day" />
               </span>
             </div>
 
-            <div className="buttonsubmit ">
-              <input className="button " type="submit" value="enviar" />
+            <div className="button-submit ">
+              <input className="button" type="submit" value="enviar" />
               <Recaptcha
                 sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                 render="explicit"
@@ -112,7 +112,7 @@ class MainPage extends Component {
               />
             </div>
           </form>
-          <div className="inf notification">
+          <div className="container-info notification">
             Contamos con:
             <br />
             <strong>{this.props.itemslength}</strong> hermandades registradas

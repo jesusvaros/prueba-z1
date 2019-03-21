@@ -17,11 +17,9 @@ const editItem = (state, action) => {
     if (a.orden < b.orden) {
       return -1;
     }
-    // a must be equal to b
     return 0;
   });
-  //state=state.item.sort();
-  console.log(state);
+  
   return newState;
 };
 

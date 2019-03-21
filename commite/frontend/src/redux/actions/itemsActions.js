@@ -5,7 +5,7 @@ import * as actionTypes from "./actionTypes";
 export const createItem = (name, email, creacion, orden) => {
   return dispatch => {
     return axios
-      .post("http://127.0.0.1:8000/api/create/", {
+      .post("https://backend-cofrade.herokuapp.com/api/create/", {
         name,
         email,
         creacion,
@@ -37,7 +37,7 @@ export const createItemSuccess = data => {
 export const editItem = (name, email, creacion, orden, id) => {
   return dispatch => {
     return axios
-      .put(`http://127.0.0.1:8000/api/${id}/update/`, {
+      .put(`https://backend-cofrade.herokuapp.com/api/${id}/update/`, {
         name,
         email,
         creacion,
@@ -61,7 +61,7 @@ export const editItemSuccess = data => {
 
 export const deleteItem = id => dispatch =>
   axios
-    .delete(`http://127.0.0.1:8000/api/${id}/delete/`)
+    .delete(`https://backend-cofrade.herokuapp.com/api/${id}/delete/`)
     .then(() => dispatch(deleteItemSuccess(id)))
     .catch(console.warn);
 
@@ -73,7 +73,7 @@ export const deleteItemSuccess = id => ({
 export const fetchItems = () => {
   return dispatch => {
     return axios
-      .get("http://127.0.0.1:8000/api/")
+      .get("https://backend-cofrade.herokuapp.com/api/")
       .then(response => {
         dispatch(fetchItemsSuccess(response.data));
       })
