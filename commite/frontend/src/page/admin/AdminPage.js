@@ -33,7 +33,7 @@ class AdminPage extends Component {
     }));
   };
 
-  upItem = index => {
+  upItem = (index) => {
     if (index === 0) {
       return;
     }
@@ -47,7 +47,7 @@ class AdminPage extends Component {
     this.update(items);
   };
 
-  downItem = index => {
+  downItem = (index) => {
     if (index === this.props.items.length - 1) {
       return;
     }

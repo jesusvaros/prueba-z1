@@ -41,13 +41,13 @@ class App extends Component {
         <div className="container-menu-down notification">
           {this.props.isAuthenticated ? (
             <div>
-              <a onClick={() => this.onBind()}>
+              <a onClick={this.onBind}>
                 {this.state.togle ? <span>Admin</span> : <span>Back</span>}
               </a>
               <a onClick={this.props.logout}>Logout</a>
             </div>
           ) : (
-            <a onClick={() => this.onBind()}>
+            <a onClick={this.onBind}>
               {this.state.togle ? <span>Login</span> : <span>Back</span>}
             </a>
           )}
